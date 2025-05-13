@@ -32,6 +32,9 @@
                         ><img src="assets/hnkb.png" alt="logo" class="logoImg"
                     /></a>
                 </div>
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
                 <ul class="nav-links">
                     <li><a href="#home" class="active">Home</a></li>
                     <li><a href="#services">Services</a></li>
@@ -400,6 +403,40 @@
                 duration: 1000,
                 once: true,
                 offset: 100,
+            });
+
+            // Mobile Menu Functionality
+            const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+            const navLinks = document.querySelector(".nav-links");
+
+            mobileMenuBtn.addEventListener("click", () => {
+                navLinks.classList.toggle("active");
+                const icon = mobileMenuBtn.querySelector("i");
+                icon.classList.toggle("fa-bars");
+                icon.classList.toggle("fa-times");
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener("click", (e) => {
+                if (
+                    !navLinks.contains(e.target) &&
+                    !mobileMenuBtn.contains(e.target)
+                ) {
+                    navLinks.classList.remove("active");
+                    const icon = mobileMenuBtn.querySelector("i");
+                    icon.classList.add("fa-bars");
+                    icon.classList.remove("fa-times");
+                }
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll(".nav-links a").forEach((link) => {
+                link.addEventListener("click", () => {
+                    navLinks.classList.remove("active");
+                    const icon = mobileMenuBtn.querySelector("i");
+                    icon.classList.add("fa-bars");
+                    icon.classList.remove("fa-times");
+                });
             });
         </script>
     </body>
